@@ -1,0 +1,70 @@
+ho 8 tail 4 room 4
+load:0x40080404,len:3860
+entry 0x4008063c
+I (30) boot: ESP-IDF v5.4.1-dirty 2nd stage bootloader
+I (30) boot: compile time Jun  3 2025 22:19:40
+I (31) boot: Multicore bootloader
+I (32) boot: chip revision: v1.0
+I (35) boot.esp32: SPI Speed      : 40MHz
+I (39) boot.esp32: SPI Mode       : DIO
+I (42) boot.esp32: SPI Flash Size : 2MB
+I (46) boot: Enabling RNG early entropy source...
+I (50) boot: Partition Table:
+I (53) boot: ## Label            Usage          Type ST Offset   Length
+I (59) boot:  0 nvs              WiFi data        01 02 00009000 00006000
+I (66) boot:  1 phy_init         RF data          01 01 0000f000 00001000
+I (72) boot:  2 factory          factory app      00 00 00010000 00100000
+I (79) boot: End of partition table
+I (82) esp_image: segment 0: paddr=00010020 vaddr=3f400020 size=0977ch ( 38780) map
+I (103) esp_image: segment 1: paddr=000197a4 vaddr=3ff80000 size=0001ch (    28) load
+I (103) esp_image: segment 2: paddr=000197c8 vaddr=3ffb0000 size=022cch (  8908) load
+I (110) esp_image: segment 3: paddr=0001ba9c vaddr=40080000 size=0457ch ( 17788) load
+I (121) esp_image: segment 4: paddr=00020020 vaddr=400d0020 size=13398h ( 78744) map
+I (149) esp_image: segment 5: paddr=000333c0 vaddr=4008457c size=086f0h ( 34544) load
+I (169) boot: Loaded app from partition at offset 0x10000
+I (169) boot: Disabling RNG early entropy source...
+I (179) cpu_start: Multicore app
+I (187) cpu_start: Pro cpu start user code
+I (188) cpu_start: cpu freq: 160000000 Hz
+I (188) app_init: Application information:
+I (188) app_init: Project name:     Content
+I (192) app_init: App version:      0b2fad6-dirty
+I (196) app_init: Compile time:     Jun  4 2025 23:13:14
+I (201) app_init: ELF file SHA256:  b1d52ee50...
+I (205) app_init: ESP-IDF:          v5.4.1-dirty
+I (210) efuse_init: Min chip rev:     v0.0
+I (213) efuse_init: Max chip rev:     v3.99
+I (217) efuse_init: Chip rev:         v1.0
+I (222) heap_init: Initializing. RAM available for dynamic allocation:
+I (228) heap_init: At 3FFAE6E0 len 00001920 (6 KiB): DRAM
+I (233) heap_init: At 3FFB2B88 len 0002D478 (181 KiB): DRAM
+I (238) heap_init: At 3FFE0440 len 00003AE0 (14 KiB): D/IRAM
+I (243) heap_init: At 3FFE4350 len 0001BCB0 (111 KiB): D/IRAM
+I (249) heap_init: At 4008CC6C len 00013394 (76 KiB): IRAM
+I (256) spi_flash: detected chip: generic
+I (258) spi_flash: flash io: dio
+W (261) spi_flash: Detected size(4096k) larger than the size in the binary image header(2048k). Using the size in the binary image header.
+I (274) main_task: Started on CPU0
+I (284) main_task: Calling app_main()
+Task1 Stack Remaining: 1756 bytes
+I (284) main_task: Returned from app_main()
+Task2 Stack Remaining: 1752 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes
+Task2 Stack Remaining: 312 bytes
+Task1 Stack Remaining: 316 bytes

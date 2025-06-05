@@ -137,26 +137,33 @@ void input_task(void *param)
     }
 }
 
+
+void TaskFunction1(void *pvParameters) {
+    while (1) {
+        // Get remaining stack space
+        UBaseType_t stackWatermark = uxTaskGetStackHighWaterMark(NULL);
+        printf("Task1 Stack Remaining: %u bytes\n", stackWatermark * sizeof(StackType_t));
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
+
+void TaskFunction2(void *pvParameters) {
+    // char largeArray[5]; // Large local array, consuming stack space
+    while (1) {
+        // Some processing
+        UBaseType_t stackWatermark = uxTaskGetStackHighWaterMark(NULL);
+        printf("Task2 Stack Remaining: %u bytes\n", stackWatermark * sizeof(StackType_t));
+    vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
+
+void setup() {
+    xTaskCreate(TaskFunction1, "Task1",2048, NULL, 1, NULL); 
+    xTaskCreate(TaskFunction2, "Task2", 2048, NULL, 1, NULL); 
+}
+
 /* Main application entry point */
 void app_main(void)
 {
-    /* Configure UART */
-    const uart_config_t uart_config = {
-        .baud_rate = 115200,
-        .data_bits = UART_DATA_8_BITS,
-        .parity = UART_PARITY_DISABLE,
-        .stop_bits = UART_STOP_BITS_1,
-        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE};
-    uart_driver_install(UART_NUM_0, 256, 0, 0, NULL, 0);
-    uart_param_config(UART_NUM_0, &uart_config);
-    uart_set_pin(UART_NUM_0, UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE,
-                 UART_PIN_NO_CHANGE, UART_PIN_NO_CHANGE);
-
-    /* Initialize semaphores */
-    mutex = xSemaphoreCreateMutex();
-    full_sem = xSemaphoreCreateCounting(BUF_SIZE, 0);
-    empty_sem = xSemaphoreCreateCounting(BUF_SIZE, BUF_SIZE);
-
-    /* Create the input task */
-    xTaskCreate(input_task, "input", 2048, NULL, 1, NULL);
+    setup(); /* Initialize tasks */
 }
