@@ -13,19 +13,19 @@ void variable_stack_task(void *pvParameters) {
     int i = 1;
     TaskHandle_t xTask = xTaskGetCurrentTaskHandle();
     // Ghi log mức stack còn lại
-    UBaseType_t watermark = uxTaskGetStackHighWaterMark(NULL);
+    UBaseType_t watermark; 
     while (1) {
         size_t size = i * 100;  // Tăng dần mức sử dụng stack
         printf("\n📦 Loop %d | Allocating %d bytes on stack\n", i, size);
-
+        
         
         // Khai báo mảng lớn (volatile để tránh tối ưu hóa)
         volatile char buffer[size];
         for (int j = 0; j < size; j++) {
             buffer[j] = j % 256;
         }
-
-
+        
+        watermark = uxTaskGetStackHighWaterMark(NULL);
         printf("💧 Stack high watermark: %u bytes\n", watermark * sizeof(StackType_t));
 
 
