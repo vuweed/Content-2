@@ -17,11 +17,12 @@ void variable_stack_task(void *pvParameters)
     UBaseType_t watermark;
     while (1)
     {
-        size_t size = i * 100; // Tăng dần mức sử dụng stack
+        size_t size = i * 50; // Tăng dần mức sử dụng stack
+        volatile char buffer[size];
+        
         printf("\n📦 Loop %d | Allocating %d bytes on stack\n", i, size);
 
         // Khai báo mảng lớn (volatile để tránh tối ưu hóa)
-        volatile char buffer[size];
         for (int j = 0; j < size; j++)
         {
             buffer[j] = j % 256;
