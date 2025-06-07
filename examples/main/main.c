@@ -148,7 +148,7 @@ void TaskFunction1(void *pvParameters) {
 }
 
 void TaskFunction2(void *pvParameters) {
-    // char largeArray[5]; // Large local array, consuming stack space
+    char largeArray[5]; // Large local array, consuming stack space
     while (1) {
         // Some processing
         UBaseType_t stackWatermark = uxTaskGetStackHighWaterMark(NULL);
@@ -159,7 +159,7 @@ void TaskFunction2(void *pvParameters) {
 
 void setup() {
     xTaskCreate(TaskFunction1, "Task1",2048, NULL, 1, NULL); 
-    xTaskCreate(TaskFunction2, "Task2", 2048, NULL, 1, NULL); 
+    xTaskCreate(TaskFunction2, "Task2", 1024, NULL, 1, NULL); 
 }
 
 /* Main application entry point */
