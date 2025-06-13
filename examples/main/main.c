@@ -5,7 +5,7 @@
 #define SMALL_STACK_SIZE 1800  /* Small stack size for overflow demonstration */
 #define NORMAL_STACK_SIZE 2048 /* Normal stack size */
 
-/*
+
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
 {
 #define ERR_STR1 "***HEHEHEHEHE ERROR*** A stack overflow in task "
@@ -13,11 +13,14 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
     printf(ERR_STR1);
     abort();
 }
+
+
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     printf("🔥 Stack overflow in task: %s\n", pcTaskName);
+    /* Handle whatever you want */
     abort();  // Optional: reset or halt
 }
-*/
+
 
 /* Function to monitor the remaining stack space for a task */
 void monitor_task_stack(TaskHandle_t taskHandle, const char *taskName)
