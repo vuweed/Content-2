@@ -19,14 +19,16 @@ SemaphoreHandle_t mutex;      /* Mutex for protecting shared resources */
 SemaphoreHandle_t full_sem;   /* Semaphore to track full slots in the buffer */
 SemaphoreHandle_t empty_sem;  /* Semaphore to track empty slots in the buffer */
 
-/* Task for producing data */
+/** 
+ * Task for producing data 
+ */
 void producer_task(void *param)
 {
     static int data = 0; /* Data to produce */
     /* Wait for an empty slot in the buffer */
     if (xSemaphoreTake(empty_sem, pdMS_TO_TICKS(100)) == pdTRUE)
     {
-        /* Lock the mutex to safely access the buffer */
+        /** Lock the mutex to safely access the buffer */
         xSemaphoreTake(mutex, portMAX_DELAY);
         buf[head] = data; /* Write data to the buffer */
         head = (head + 1) % BUF_SIZE; /* Update head pointer */
@@ -66,7 +68,9 @@ void producer_task(void *param)
     vTaskDelete(NULL); /* Delete the task after execution */
 }
 
-/* Task for consuming data */
+/** 
+ * Task for consuming data 
+ */
 void consumer_task(void *param)
 {
     int value;
@@ -112,7 +116,9 @@ void consumer_task(void *param)
     vTaskDelete(NULL); /* Delete the task after execution */
 }
 
-/* Task for handling user input */
+/** 
+ * Task for handling user input 
+ */
 void input_task(void *param)
 {
     uint8_t data[1]; /* Buffer to store input data */
@@ -137,37 +143,47 @@ void input_task(void *param)
     }
 }
 
-
+/**
+ * Task to print remaining stack space for Task1
+ */
 void TaskFunction1(void *pvParameters) {
     while (1) {
-        // Get remaining stack space
+        /* Get remaining stack space */
         UBaseType_t stackWatermark = uxTaskGetStackHighWaterMark(NULL);
         printf("Task1 Stack Remaining: %u bytes\n", stackWatermark * sizeof(StackType_t));
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
+/**
+ * Task to print remaining stack space for Task2, with large array on heap
+ */
 void TaskFunction2(void *pvParameters) {
-    char *largeArray = (char *)malloc(4048); //  Move large variables to the heap using malloc():
+    char *largeArray = (char *)malloc(4048); /* Move large variables to the heap using malloc() */
     if (largeArray == NULL) {
         printf("Failed to allocate memory for largeArray\n");
         vTaskDelete(NULL);
     }
-    largeArray[0] = 'A'; // Prevent optimization of the array 
+    largeArray[0] = 'A'; /* Prevent optimization of the array */
     while (1) {
-        // Some processing
+        /* Some processing */
         UBaseType_t stackWatermark = uxTaskGetStackHighWaterMark(NULL);
         printf("Task2 Stack Remaining: %u bytes\n", stackWatermark * sizeof(StackType_t));
-    vTaskDelay(pdMS_TO_TICKS(1000));
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
+/**
+ * Setup function to create tasks
+ */
 void setup() {
     xTaskCreate(TaskFunction1, "Task1",2048, NULL, 1, NULL); 
     xTaskCreate(TaskFunction2, "Task2", 2024, NULL, 1, NULL); 
 }
 
-/* Main application entry point */
+/** 
+ * Main application entry point 
+ */
 void app_main(void)
 {
     setup(); /* Initialize tasks */
