@@ -9,20 +9,21 @@
 // }
 
 // Task tiêu tốn stack tăng dần
+/* Task that gradually increases stack usage */
 void variable_stack_task(void *pvParameters)
 {
     int i = 1;
     TaskHandle_t xTask = xTaskGetCurrentTaskHandle();
-    // Ghi log mức stack còn lại
+    /* Log remaining stack watermark */
     UBaseType_t watermark;
     while (1)
     {
-        size_t size = i * 50; // Tăng dần mức sử dụng stack
+        size_t size = i * 50; /* Gradually increase stack usage */
         volatile char buffer[size];
-        
+
         printf("\n📦 Loop %d | Allocating %d bytes on stack\n", i, size);
 
-        // Khai báo mảng lớn (volatile để tránh tối ưu hóa)
+        /* Fill the large array (volatile to prevent optimization) */
         for (int j = 0; j < size; j++)
         {
             buffer[j] = j % 256;
