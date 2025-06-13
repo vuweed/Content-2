@@ -18,7 +18,7 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName)
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     printf("🔥 Stack overflow in task: %s\n", pcTaskName);
     /* Handle whatever you want */
-    abort();  // Optional: reset or halt
+    abort();  /* Optional: reset or halt
 }
 
 
